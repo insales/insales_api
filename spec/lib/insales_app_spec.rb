@@ -41,6 +41,9 @@ describe InsalesApi::App do
   end
 
   describe "authorize" do
+    before :each do
+      app.store_auth_token
+    end
     it "should authorize by valid token" do
       app.authorize app.auth_token
       app.should be_authorized

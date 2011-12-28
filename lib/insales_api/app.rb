@@ -2,7 +2,7 @@ require 'digest/md5'
 module InsalesApi
   class App
     cattr_accessor :api_key, :api_host, :api_secret, :api_autologin_path
-    attr_accessor :shop, :password, :authorized, :auth_token
+    attr_reader :authorized, :auth_token, :shop, :password
 
     def initialize(shop, password)
       @authorized = false
@@ -16,7 +16,7 @@ module InsalesApi
     end
 
     def store_auth_token
-      @auth_token = InsalesApi::Password.create(password, salt)
+      @auth_token ||= InsalesApi::Password.create(password, salt)
     end
 
     def salt
@@ -25,7 +25,7 @@ module InsalesApi
 
     def authorize token
       @authorized = false
-      if self.auth_token == token
+      if self.auth_token and self.auth_token == token
         @authorized = true
       end
 
