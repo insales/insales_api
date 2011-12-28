@@ -1,0 +1,3 @@
+add in your Gemfile
+
+require 'insales_api'
