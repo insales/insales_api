@@ -9,4 +9,6 @@ require "insales_api/resources/order.rb"
 require "insales_api/resources/product.rb"
 require "insales_api/resources/variant.rb"
 require "insales_api/resources/webhook.rb"
+require "insales_api/resources/order_line.rb"
+require "insales_api/resources/order/order_line.rb"
 
