@@ -1,3 +1,3 @@
 module InsalesApi
-  class Widget < Base; end
+  class ApplicationWidget < Base; end
 end
