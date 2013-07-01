@@ -16,4 +16,5 @@ require "insales_api/resources/field.rb"
 require "insales_api/resources/delivery_variant.rb"
 require "insales_api/resources/payment_gateway.rb"
 require "insales_api/resources/js_tag.rb"
+require "insales_api/resources/domain.rb"
 
