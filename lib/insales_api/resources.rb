@@ -17,4 +17,6 @@ require "insales_api/resources/delivery_variant.rb"
 require "insales_api/resources/payment_gateway.rb"
 require "insales_api/resources/js_tag.rb"
 require "insales_api/resources/domain.rb"
-
+require "insales_api/resources/page.rb"
+require "insales_api/resources/theme.rb"
+require "insales_api/resources/asset.rb"
