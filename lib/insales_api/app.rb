@@ -1,7 +1,6 @@
-require 'digest/md5'
 module InsalesApi
   class App
-    cattr_accessor :api_key, :api_host, :api_secret, :api_autologin_path
+    class_attribute :api_key, :api_host, :api_secret, :api_autologin_path
     attr_reader :authorized, :auth_token, :shop, :password
 
     def initialize(shop, password)
@@ -12,7 +11,8 @@ module InsalesApi
 
     def authorization_url
       store_auth_token
-      "http://#{shop}/admin/applications/#{self.class.api_key}/login?token=#{salt}&login=http://#{self.class.api_host}/#{self.class.api_autologin_path}"
+      "http://#{shop}/admin/applications/#{self.class.api_key}/login?" \
+        "token=#{salt}&login=http://#{self.class.api_host}/#{self.class.api_autologin_path}"
     end
 
     def store_auth_token

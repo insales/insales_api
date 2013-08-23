@@ -6,7 +6,7 @@ module InsalesApi
       self.user     = api_key
       self.site     = "http://#{shop}/admin/"
       self.password = password
-      return
+      nil
     end
   end
 end
