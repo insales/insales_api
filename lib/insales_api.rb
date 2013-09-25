@@ -22,6 +22,7 @@ module InsalesApi
     autoload :OptionValue
     autoload :Product
     autoload :Variant
+    autoload :Image
     autoload :Webhook
     autoload :Order
     autoload :OrderLine
