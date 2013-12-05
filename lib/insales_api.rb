@@ -37,5 +37,6 @@ module InsalesApi
     autoload :Asset
     autoload :RecurringApplicationCharge
     autoload :File
+    autoload :DiscountCode
   end
 end
