@@ -11,5 +11,9 @@ module InsalesApi
     def to_xml(options = {})
       super(options.merge({:methods => :order_lines_attributes}))
     end
+
+    def paid?
+      self.financial_status == 'paid'
+    end
   end
 end
