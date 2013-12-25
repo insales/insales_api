@@ -35,6 +35,7 @@ module InsalesApi
     autoload :Page
     autoload :Theme
     autoload :Asset
+    autoload :ApplicationCharge
     autoload :RecurringApplicationCharge
     autoload :File
   end
