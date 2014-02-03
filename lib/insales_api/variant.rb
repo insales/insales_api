@@ -1,11 +1,7 @@
 module InsalesApi
   class Variant < Base
-    GROUP_UPDATE_PATH = '/admin/products/variants_group_update.xml'
-    self.prefix = '/admin/products/:product_id/'
-
     class << self
-      # Выполняет обновление всех переданных модификаций.
-      # variants - массив c модицикациями в формате
+      # Updates all given variants. +variants+ should be array:
       #
       #   [
       #     {
@@ -20,7 +16,7 @@ module InsalesApi
       #     },
       #   ]
       def group_update(variants)
-        connection.put(GROUP_UPDATE_PATH, variants.to_xml(root: :variants), headers)
+        put(:group_update, {}, format.encode(variants, root: :variants))
       end
     end
   end

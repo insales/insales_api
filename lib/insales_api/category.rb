@@ -1,7 +1,13 @@
 module InsalesApi
   class Category < Base
-    def self.set_products_category new_category_id, product_ids
-      connection.put("/admin/categories/set_products_category.xml", {:id => new_category_id, :product_ids => Array(product_ids)}.to_xml(:root => :new_category), headers)
+    class << self
+      def set_products_category(new_category_id, product_ids)
+        data = {
+          id:           new_category_id,
+          product_ids:  Array(product_ids),
+        }
+        put(:set_products_category, {}, format.encode(data, root: :new_category))
+      end
     end
   end
 end

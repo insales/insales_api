@@ -1,35 +1,68 @@
 module InsalesApi
   class App
-    class_attribute :api_key, :api_host, :api_secret, :api_autologin_path
-    attr_reader :authorized, :auth_token, :shop, :password
+    class_attribute :api_key, :api_secret, :api_autologin_url, :api_host, :api_autologin_path,
+      :base_resource_class
+    attr_reader :authorized, :domain, :password
+    self.base_resource_class = Base
 
-    def initialize(shop, password)
+    class << self
+      def configure_api(domain, password)
+        base_resource_class.configure(api_key, domain, password)
+      end
+
+      delegate :dump_config, :restore_config, to: :base_resource_class
+
+      def prepare_domain(domain)
+        domain.to_s.strip.downcase
+      end
+
+      alias_method :prepare_shop, :prepare_domain
+      deprecate prepare_shop: :prepare_domain,
+        api_host: :api_autologin_url,
+        api_autologin_path: :api_autologin_url,
+        deprecator: Deprecator
+
+      def install(domain, token, insales_id)
+        true
+      end
+
+      def uninstall(domain, password)
+        true
+      end
+
+      def password_by_token(token)
+        InsalesApi::Password.create(api_secret, token)
+      end
+    end
+
+    def initialize(domain, password)
       @authorized = false
-      @shop       = self.class.prepare_shop shop
+      @domain     = self.class.prepare_domain(domain)
       @password   = password
     end
 
     def authorization_url
-      store_auth_token
-      "http://#{shop}/admin/applications/#{self.class.api_key}/login?" \
-        "token=#{salt}&login=http://#{self.class.api_host}/#{self.class.api_autologin_path}"
+      URI::Generic.build(
+        scheme:   'http',
+        host:     domain,
+        path:     "/admin/applications/#{api_key}/login",
+        query:    {
+          token:  salt,
+          login:  api_autologin_url || "http://#{api_host}/#{api_autologin_path}",
+        }.to_query,
+      ).to_s
     end
 
-    def store_auth_token
+    def auth_token
       @auth_token ||= InsalesApi::Password.create(password, salt)
     end
 
     def salt
-      @salt ||= Digest::MD5.hexdigest("Twulvyeik#{$$}#{Time.now.to_i}thithAwn")
+      @salt ||= SecureRandom.hex
     end
 
-    def authorize token
-      @authorized = false
-      if self.auth_token and self.auth_token == token
-        @authorized = true
-      end
-
-      @authorized
+    def authorize(token)
+      @authorized = auth_token == token
     end
 
     def authorized?
@@ -37,29 +70,11 @@ module InsalesApi
     end
 
     def configure_api
-      self.class.configure_api shop, password
+      self.class.configure_api(domain, password)
     end
 
-    class << self
-      def configure_api shop, password
-        InsalesApi::Base.configure api_key, shop, password
-      end
-
-      def prepare_shop shop
-        shop.to_s.strip.downcase
-      end
-
-      def install shop, token, insales_id
-        true
-      end
-
-      def uninstall shop, password
-        true
-      end
-
-      def password_by_token token
-        InsalesApi::Password.create(api_secret, token)
-      end
-    end
+    alias_method :store_auth_token, :auth_token
+    alias_method :shop, :domain
+    deprecate store_auth_token: :auth_token, shop: :domain, deprecator: Deprecator
   end
 end

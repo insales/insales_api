@@ -1,4 +1,3 @@
 module InsalesApi
-  class DiscountCode < Base
-  end
+  class DiscountCode < Base; end
 end

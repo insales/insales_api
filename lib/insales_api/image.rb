@@ -1,5 +1,5 @@
 module InsalesApi
   class Image < Base
-    self.prefix = "/admin/products/:product_id/"
+    self.prefix = "#{prefix}products/:product_id/"
   end
 end

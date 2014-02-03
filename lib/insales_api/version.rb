@@ -1,3 +1,10 @@
 module InsalesApi
-  VERSION = "0.0.14"
+  module VERSION
+    MAJOR = 0
+    MINOR = 1
+    TINY  = 0
+    PRE   = 'pre'
+
+    STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
+  end
 end

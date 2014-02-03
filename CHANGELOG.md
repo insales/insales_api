@@ -1,3 +1,10 @@
+## 0.1.0
+
+* Helpers
+* ProductFieldValue
+* Controller auth mixins
+* Account inherits AR::Singleton (it breaks ::current & #update methods)
+
 ## 0.0.14
 
 * Added Image resource

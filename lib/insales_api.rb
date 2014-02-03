@@ -1,43 +1,51 @@
+require 'digest/md5'
 require 'active_support/core_ext'
 require 'active_resource'
 # backport from 4.0
 require 'active_resource/singleton' unless ActiveResource.const_defined?(:Singleton, false)
-require 'digest/md5'
 
 module InsalesApi
   extend ActiveSupport::Autoload
 
-  eager_autoload do
-    autoload :Version
-    autoload :App
-    autoload :Password
+  Deprecator = ActiveSupport::Deprecation.new('1.0', name)
 
+  eager_autoload do
+    autoload :VERSION
     autoload :Base
+    autoload :Password
+    autoload :App
+
     autoload :Account
+    autoload :ApplicationCharge
+    autoload :ApplicationWidget
+    autoload :Asset
     autoload :Category
     autoload :Client
-    autoload :Collection
     autoload :Collect
+    autoload :Collection
+    autoload :DeliveryVariant
+    autoload :DiscountCode
+    autoload :Domain
+    autoload :Field
+    autoload :File
+    autoload :Image
+    autoload :JsTag
     autoload :OptionName
     autoload :OptionValue
-    autoload :Product
-    autoload :Variant
-    autoload :Image
-    autoload :Webhook
     autoload :Order
     autoload :OrderLine
-    autoload :ApplicationWidget
-    autoload :Field
-    autoload :DeliveryVariant
-    autoload :PaymentGateway
-    autoload :JsTag
-    autoload :Domain
     autoload :Page
-    autoload :Theme
-    autoload :Asset
-    autoload :ApplicationCharge
+    autoload :PaymentGateway
+    autoload :Product
+    autoload :ProductFieldValue
     autoload :RecurringApplicationCharge
-    autoload :File
-    autoload :DiscountCode
+    autoload :Theme
+    autoload :Variant
+    autoload :Webhook
   end
 end
+
+require 'insales_api/helpers/init_api'
+require 'insales_api/helpers/has_insales_object'
+
+ActiveSupport.run_load_hooks(:insales_api, InsalesApi)

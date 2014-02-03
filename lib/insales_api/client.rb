@@ -1,3 +1,5 @@
 module InsalesApi
-  class Client < Base; end
+  class Client < Base
+    extend Resource::WithUpdatedSince
+  end
 end
