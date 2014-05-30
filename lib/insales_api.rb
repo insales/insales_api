@@ -1,4 +1,5 @@
 require 'digest/md5'
+require 'active_support'
 require 'active_support/core_ext'
 require 'active_resource'
 # backport from 4.0
