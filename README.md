@@ -1,5 +1,7 @@
 # InsalesApi gem
 
+[![Build Status](https://secure.travis-ci.org/insales/insales_api.png?branch=master)](http://travis-ci.org/insales/insales_api)
+
 Insales api client based on [ActiveResource](https://github.com/rails/activeresource).
 
 Rails application example is [here](https://github.com/insales/insales_app).
