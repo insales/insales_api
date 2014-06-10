@@ -10,7 +10,7 @@ describe InsalesApi::App do
   describe '#initialize' do
     its(:domain) { should eq(domain) }
     its(:password) { should eq(password) }
-    its(:authorized?) { should be_false }
+    its(:authorized?) { should be false }
   end
 
   describe '#configure_api' do
@@ -50,12 +50,12 @@ describe InsalesApi::App do
 
     context 'when valid token is given' do
       let(:token) { app.auth_token }
-      it { should be_true }
+      it { should be true }
     end
 
     context 'when invalid token is given' do
       let(:token) { 'bad_token' }
-      it { should be_false }
+      it { should be false }
     end
   end
 

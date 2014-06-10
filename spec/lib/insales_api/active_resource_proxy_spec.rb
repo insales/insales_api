@@ -23,37 +23,37 @@ describe InsalesApi::ActiveResourceProxy do
 
     context 'for scalar' do
       let(:object) { true }
-      it { should be_false }
+      it { should be false }
     end
 
     context 'for array' do
       let(:object) { [] }
-      it { should be_true }
+      it { should be true }
     end
 
     context 'for hash' do
       let(:object) { {} }
-      it { should be_true }
+      it { should be true }
     end
 
     context 'for InsalesApi::Base class' do
       let(:object) { InsalesApi::Account }
-      it { should be_true }
+      it { should be true }
     end
 
     context 'for InsalesApi::Base object' do
       let(:object) { InsalesApi::Account.new }
-      it { should be_true }
+      it { should be true }
     end
 
     context 'for ActiveResource::Collection object' do
       let(:object) { ActiveResource::Collection.new }
-      it { should be_true }
+      it { should be true }
     end
 
     context 'for ActiveResource::Base object' do
       let(:object) { ActiveResource::Base.new }
-      it { should be_false }
+      it { should be false }
     end
   end
 end
