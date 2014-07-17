@@ -39,6 +39,7 @@ module InsalesApi
     autoload :PaymentGateway
     autoload :Product
     autoload :ProductFieldValue
+    autoload :Property
     autoload :RecurringApplicationCharge
     autoload :Theme
     autoload :Variant
