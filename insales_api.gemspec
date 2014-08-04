@@ -3,7 +3,7 @@ require 'insales_api/version'
 
 Gem::Specification.new do |s|
   s.name        = 'insales_api'
-  s.version     = InsalesApi::VERSION::STRING
+  s.version     = InsalesApi::VERSION.to_s
   s.authors     = 'InSales'
   s.email       = 'dg@insales.ru'
   s.homepage    = 'https://github.com/insales/insales_api'

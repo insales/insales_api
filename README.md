@@ -55,3 +55,11 @@ InsalesApi.wait_retry do
   products = InsalesApi::Products.all # will try to get products until the limit resets
 end
 ```
+
+## Generators
+
+WIP
+
+```
+rails g insales:app
+```

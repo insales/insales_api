@@ -89,6 +89,7 @@ module InsalesApi
 end
 
 require 'insales_api/helpers/init_api'
-require 'insales_api/helpers/has_insales_object'
+require 'insales_api/helpers/has_insales_resource'
+require 'insales_api/helpers/has_many'
 
 ActiveSupport.run_load_hooks(:insales_api, InsalesApi)

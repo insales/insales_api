@@ -11,8 +11,8 @@ module Insales::Controller
     end
 
     def create
-      account = find_account_by_request
-      return render_not_found unless account
+      account = insales_login_form.account
+      return render(action: :new) unless account
       store_location(insales_success_login_path)
       insales_autologin_start(account)
     end
@@ -29,11 +29,5 @@ module Insales::Controller
       insales_logout
       redirect_to action: :new
     end
-
-    protected
-      def render_not_found
-        flash.now[:error] = t(:'.account_not_found').html_safe
-        render action: :new
-      end
   end
 end

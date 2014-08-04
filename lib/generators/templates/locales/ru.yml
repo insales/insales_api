@@ -1,0 +1,19 @@
+---
+ru:
+  helpers:
+    submit:
+      insales_login_form:
+        create: Войти
+
+  simple_form:
+    labels:
+      insales_login_form:
+        domain: Домен
+    hints:
+      insales_login_form:
+        domain: 'Например, my-shop.myinsales.ru'
+
+  cpanel:
+    sessions:
+      new:
+        title: Авторизация

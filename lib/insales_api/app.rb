@@ -75,6 +75,10 @@ module InsalesApi
 
     alias_method :store_auth_token, :auth_token
     alias_method :shop, :domain
-    deprecate store_auth_token: :auth_token, shop: :domain, deprecator: Deprecator
+    deprecate store_auth_token: :auth_token,
+      shop: :domain,
+      api_host: :api_autologin_url,
+      api_autologin_path: :api_autologin_url,
+      deprecator: Deprecator
   end
 end

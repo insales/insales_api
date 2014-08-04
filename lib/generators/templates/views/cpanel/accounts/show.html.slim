@@ -1,0 +1,4 @@
+.container: .row: .col-md-5
+  = simple_form_for resource, url: [:cpanel, resource] do |f|
+    = f.input :some_option
+    = f.button :submit, class: 'btn-primary'

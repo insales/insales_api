@@ -53,11 +53,10 @@ module InsalesApi::Helpers
         file, line = caller.first.split(':', 2)
         methods.each do |method|
           alias_method_chain method, :init_api do |target, punct|
-            class_eval <<-RUBY, file, line.to_i  - 1
-              def #{target}_with_init_api#{punct}(*args, &block)                # def sell_with_init_api(*args, &block)
-                init_api { #{target}_without_init_api#{punct}(*args, &block) }  #   init_api { sell_without_init_api(*args, &block) }
-              end                                                               # end
-            RUBY
+            method_without = "#{target}_without_init_api#{punct}"
+            define_method "#{target}_with_init_api#{punct}" do |*args, &block|
+              init_api { send(method_without, *args, &block) }
+            end
           end
         end
       end

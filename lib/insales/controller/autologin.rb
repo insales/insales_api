@@ -6,12 +6,13 @@ module Insales::Controller
         insales_logout if params[:domain].present? && params[:domain] != session[:domain]
         return if insales_authenticate_from_session
         store_location
-        account = find_account_by_request
+        account = insales_login_form.account
         return insales_autologin_start(account) if account
         redirect_to insales_login_path
       end
 
       def insales_authenticate_from_session
+        return @account = account_class.first
         data = session[:insales_session]
         return unless data && data[:account_id] && data[:insales_id]
         @account = account_class.where(account_id: data[:account_id]).

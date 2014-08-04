@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    - title = t(:'.title', rescue_format: :text)
+    title #{title}
+    = stylesheet_link_tag    'login_form', media: 'all'
+    = javascript_include_tag 'login_form'
+    = csrf_meta_tags
+  body
+    .container: .row
+      .col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
+        .login-form-panel.panel.panel-default
+          .panel-heading= title
+          .panel-body
+            = simple_form_for insales_login_form, url: cpanel_session_path do |f|
+              = f.input :domain
+              = f.button :submit, class: 'btn-primary'

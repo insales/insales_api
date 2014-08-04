@@ -1,0 +1,19 @@
+---
+en:
+  helpers:
+    submit:
+      insales_login_form:
+        create: Sign in
+
+  simple_form:
+    labels:
+      insales_login_form:
+        domain: Domain
+    hints:
+      insales_login_form:
+        domain: Ex. my-shop.myinsales.ru
+
+  cpanel:
+    sessions:
+      new:
+        title: Authorization
