@@ -27,10 +27,10 @@ MyApp.configure_api('domain', 'password')
 ## Use
 
 ```ruby
-order = InsaleApi::Order.find 123
+order = InsalesApi::Order.find 123
 
 # singleton resources
-account = InsaleApi::Account.find
+account = InsalesApi::Account.find
 ```
 
 ### Handling Insales API request limit
