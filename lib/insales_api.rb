@@ -38,6 +38,7 @@ module InsalesApi
     autoload :Page
     autoload :PaymentGateway
     autoload :Product
+    autoload :ProductField
     autoload :ProductFieldValue
     autoload :Property
     autoload :RecurringApplicationCharge
