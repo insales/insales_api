@@ -22,6 +22,7 @@ module InsalesApi
     autoload :Asset
     autoload :Category
     autoload :Client
+    autoload :ClientGroup
     autoload :Collect
     autoload :Collection
     autoload :DeliveryVariant
