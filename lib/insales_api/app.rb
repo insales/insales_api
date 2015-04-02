@@ -42,9 +42,13 @@ module InsalesApi
     end
 
     def authorization_url
+      host, port = domain, nil
+      match = /(.+):(\d+)/.match host
+      host, port = match[1..2] if match
       URI::Generic.build(
         scheme:   'http',
-        host:     domain,
+        host:     host,
+        port:     port && port.to_i,
         path:     "/admin/applications/#{api_key}/login",
         query:    {
           token:  salt,
