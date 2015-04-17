@@ -1,4 +1,3 @@
 module InsalesApi
-  class ClientGroup < Base
-  end
+  class ClientGroup < Base; end
 end

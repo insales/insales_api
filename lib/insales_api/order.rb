@@ -1,10 +1,14 @@
+# coding: utf-8
 module InsalesApi
   class Order < Base
     extend Resource::WithUpdatedSince
 
     def order_lines_attributes
       @order_lines_attributes = order_lines.map do |order_line|
-        order_line.as_json['order_line']
+        ol = order_line.as_json
+        # при смене версии рельсов (видимо) изменилась сериализация
+        ol = ol['order_line'] if ol['order_line']
+        ol
       end
     end
 
