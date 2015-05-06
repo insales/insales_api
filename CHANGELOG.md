@@ -4,6 +4,10 @@
 * ProductFieldValue
 * Controller auth mixins
 * Account inherits AR::Singleton (it breaks ::current & #update methods)
+* Added wait_retry method
+* Added Property resource
+* Added ProductField resource
+* Added ClientGroup resource
 
 ## 0.0.14
 
