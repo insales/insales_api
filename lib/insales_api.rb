@@ -32,6 +32,7 @@ module InsalesApi
     autoload :File
     autoload :Image
     autoload :JsTag
+    autoload :Notification
     autoload :OptionName
     autoload :OptionValue
     autoload :Order
