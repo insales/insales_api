@@ -42,6 +42,7 @@ module InsalesApi
     autoload :ProductField
     autoload :ProductFieldValue
     autoload :Property
+    autoload :Characteristic
     autoload :RecurringApplicationCharge
     autoload :Theme
     autoload :Variant
