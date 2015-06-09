@@ -45,6 +45,7 @@ module InsalesApi
     autoload :Property
     autoload :RecurringApplicationCharge
     autoload :Theme
+    autoload :User
     autoload :Variant
     autoload :Webhook
   end
