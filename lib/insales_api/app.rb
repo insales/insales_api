@@ -57,8 +57,8 @@ module InsalesApi
       ).to_s
     end
 
-    def auth_token
-      @auth_token ||= InsalesApi::Password.create(password, salt)
+    def auth_token(user_email = '', user_name = '', user_id = '')
+      @auth_token ||= InsalesApi::Password.create(password, salt, user_email, user_name, user_id)
     end
 
     def salt
