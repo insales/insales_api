@@ -26,16 +26,6 @@ describe InsalesApi::ActiveResourceProxy do
       it { should be false }
     end
 
-    context 'for array' do
-      let(:object) { [] }
-      it { should be true }
-    end
-
-    context 'for hash' do
-      let(:object) { {} }
-      it { should be true }
-    end
-
     context 'for InsalesApi::Base class' do
       let(:object) { InsalesApi::Account }
       it { should be true }
