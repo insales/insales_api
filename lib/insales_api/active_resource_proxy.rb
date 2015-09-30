@@ -2,7 +2,6 @@ module InsalesApi
   class ActiveResourceProxy
     class << self
       def need_proxy?(value)
-        return true if value.is_a?(Hash) || value.is_a?(Array)
         klass = value.is_a?(Class) ? value : value.class
         return true if klass < Base || klass <= ActiveResource::Collection
         false
@@ -14,8 +13,8 @@ module InsalesApi
       @subject    = subject
     end
 
-    def respond_to_missing?(method_name)
-      @subject.respond_to?(method_name) || super
+    def respond_to_missing?(method_name, include_private)
+      @subject.respond_to?(method_name, include_private) || super
     end
 
     def method_missing(method_id, *args, &block)
