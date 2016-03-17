@@ -25,6 +25,7 @@ module InsalesApi
     autoload :ClientGroup
     autoload :Collect
     autoload :Collection
+    autoload :Currency
     autoload :DeliveryVariant
     autoload :DiscountCode
     autoload :Domain
@@ -39,12 +40,14 @@ module InsalesApi
     autoload :OrderLine
     autoload :Page
     autoload :PaymentGateway
+    autoload :PriceKind
     autoload :Product
     autoload :ProductField
     autoload :ProductFieldValue
     autoload :Property
     autoload :Characteristic
     autoload :RecurringApplicationCharge
+    autoload :StockCurrency
     autoload :Theme
     autoload :User
     autoload :Variant
