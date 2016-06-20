@@ -1,5 +1,6 @@
 module InsalesApi
   class Category < Base
+    extend Resource::WithUpdatedSince
     class << self
       def set_products_category(new_category_id, product_ids)
         data = {

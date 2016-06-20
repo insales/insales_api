@@ -1,3 +1,5 @@
 module InsalesApi
-  class Collection < Base; end
+  class Collection < Base
+    extend Resource::WithUpdatedSince
+  end
 end
