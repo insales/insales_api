@@ -15,7 +15,11 @@ module InsalesApi
             updated_since:  updated_since,
             from_id:        last_id,
           ))
+
+          raise ActiveResource::ResourceNotFound if items.nil?
+
           return unless items.any?
+
           yield items
           return if items.count < per_page
           last_item     = items.last
