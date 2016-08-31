@@ -16,7 +16,7 @@ module InsalesApi
             from_id:        last_id,
           ))
 
-          raise ActiveResource::ResourceNotFound if items.nil?
+          raise(ActiveResource::ResourceNotFound.new(nil)) if items.nil?
 
           return unless items.any?
 
