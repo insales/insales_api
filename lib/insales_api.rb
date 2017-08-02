@@ -26,6 +26,7 @@ module InsalesApi
     autoload :Collect
     autoload :Collection
     autoload :Currency
+    autoload :CustomStatus
     autoload :DeliveryVariant
     autoload :DiscountCode
     autoload :Domain
