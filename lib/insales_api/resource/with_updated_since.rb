@@ -12,7 +12,7 @@ module InsalesApi
         last_id   = nil
         loop do
           items = all(params: params.merge(
-            updated_since:  updated_since,
+            updated_since:  updated_since.to_s('%d.%m.%Y %H:%M:%S'),
             from_id:        last_id,
           ))
 
