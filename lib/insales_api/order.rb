@@ -13,7 +13,11 @@ module InsalesApi
     end
 
     def to_xml(options = {})
-      super(options.merge(methods: :order_lines_attributes))
+      serialized_options = options.dup
+      if respond_to? :order_lines_attributes
+        serialized_options[:methods] = :order_lines_attributes
+      end
+      super(serialized_options)
     end
 
     def paid?
