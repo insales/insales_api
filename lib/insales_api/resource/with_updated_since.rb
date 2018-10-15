@@ -2,7 +2,7 @@ module InsalesApi
   module Resource
     module WithUpdatedSince
       def find_in_batches(options = {}, &block)
-        updated_since = options.delete(:updated_since) || '2000-01-01 00:00:00'.to_datetime
+        return super unless updated_since = options.delete(:updated_since)
         find_updated_since(updated_since, options, &block)
       end
 
