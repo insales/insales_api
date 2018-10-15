@@ -9,7 +9,7 @@ module InsalesApi
       def find_updated_since(updated_since, options = {})
         per_page = options[:per_page] || PER_PAGE_DEFAULT
         params    = { per_page: per_page }.merge(options[:params] || {})
-        last_id   = nil
+        last_id   = options[:last_id] || nil
         loop do
           items = all(params: params.merge(
             updated_since:  updated_since,
