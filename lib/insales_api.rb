@@ -8,7 +8,7 @@ require 'active_resource/singleton' unless ActiveResource.const_defined?(:Single
 module InsalesApi
   extend ActiveSupport::Autoload
 
-  Deprecator = ActiveSupport::Deprecation.new('1.0', name)
+ #  Deprecator = ActiveSupport::Deprecation.new('1.0', name)
 
   eager_autoload do
     autoload :VERSION
@@ -19,7 +19,9 @@ module InsalesApi
     autoload :Account
     autoload :ApplicationCharge
     autoload :ApplicationWidget
+    autoload :Article
     autoload :Asset
+    autoload :Blog
     autoload :Category
     autoload :Client
     autoload :ClientGroup
