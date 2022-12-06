@@ -57,7 +57,7 @@ module InsalesApi
   end
 
   class << self
-    # Calls the supplied block. If the block raises <tt>ActiveResource::ServerError</tt> with 503
+    # Calls the supplied block. If the block raises <tt>ActiveResource::ServerError</tt> with 429
     # code which means Insales API request limit is reached, it will wait for the amount of seconds
     # specified in 'Retry-After' response header. The called block will receive a parameter with
     # current attempt number.
@@ -87,7 +87,7 @@ module InsalesApi
         attempts += 1
         yield attempts
       rescue ActiveResource::ServerError => ex
-        raise ex if '503' != ex.response.code.to_s
+        raise ex if '429' != ex.response.code.to_s
         raise ex if max_attempts && attempts >= max_attempts
         retry_after = (ex.response['Retry-After'] || 150).to_i
         callback.call(retry_after, attempts, max_attempts, ex) if callback

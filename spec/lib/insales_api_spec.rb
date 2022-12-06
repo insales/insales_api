@@ -31,7 +31,7 @@ describe InsalesApi do
         counter += 1
 
         if counter < 3
-          raise ActiveResource::ServerError.new(response_stub.new("503", "0"))
+          raise ActiveResource::ServerError.new(response_stub.new("429", "0"))
         end
       end
 
@@ -48,7 +48,7 @@ describe InsalesApi do
         counter += 1
 
         if counter < 3
-          raise ActiveResource::ServerError.new(response_stub.new("503", "0"))
+          raise ActiveResource::ServerError.new(response_stub.new("429", "0"))
         end
       end
     end
@@ -59,7 +59,7 @@ describe InsalesApi do
         last_attempt_no = x
 
         if last_attempt_no < 3
-          raise ActiveResource::ServerError.new(response_stub.new("503", "0"))
+          raise ActiveResource::ServerError.new(response_stub.new("429", "0"))
         end
       end
 
@@ -69,7 +69,7 @@ describe InsalesApi do
     it 'should raise if no attempts left' do
       expect do
         described_class.wait_retry(3) do |x|
-          raise ActiveResource::ServerError.new(response_stub.new("503", "0"))
+          raise ActiveResource::ServerError.new(response_stub.new("429", "0"))
         end
       end.to raise_error(ActiveResource::ServerError)
     end
@@ -99,7 +99,7 @@ describe InsalesApi do
     it 'should run until success' do |x|
       success = false
       described_class.wait_retry do |x|
-        raise ActiveResource::ServerError.new(response_stub.new("503", "0")) if x < 10
+        raise ActiveResource::ServerError.new(response_stub.new("429", "0")) if x < 10
         success = true
       end
 
