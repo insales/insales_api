@@ -42,6 +42,7 @@ module InsalesApi
     autoload :OrderLine
     autoload :Page
     autoload :PaymentGateway
+    autoload :PickUpSource
     autoload :PriceKind
     autoload :Product
     autoload :ProductField
