@@ -1,4 +1,5 @@
 # coding: utf-8
+
 module InsalesApi
   class Order < Base
     extend Resource::WithUpdatedSince

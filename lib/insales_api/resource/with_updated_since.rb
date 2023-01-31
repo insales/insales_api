@@ -3,6 +3,7 @@ module InsalesApi
     module WithUpdatedSince
       def find_in_batches(options = {}, &block)
         return super unless updated_since = options.delete(:updated_since)
+
         find_updated_since(updated_since, options, &block)
       end
 
@@ -12,8 +13,8 @@ module InsalesApi
         last_id   = options[:last_id] || nil
         loop do
           items = all(params: params.merge(
-            updated_since:  updated_since,
-            from_id:        last_id,
+            updated_since: updated_since,
+            from_id: last_id,
           ))
 
           raise(ActiveResource::ResourceNotFound.new(nil)) if items.nil?
@@ -22,6 +23,7 @@ module InsalesApi
 
           yield items
           return if items.count < per_page
+
           last_item     = items.last
           last_id       = last_item.id
           updated_since = last_item.updated_at

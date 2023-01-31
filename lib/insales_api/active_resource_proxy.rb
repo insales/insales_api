@@ -4,6 +4,7 @@ module InsalesApi
       def need_proxy?(value)
         klass = value.is_a?(Class) ? value : value.class
         return true if klass < Base || klass <= ActiveResource::Collection
+
         false
       end
     end
@@ -22,9 +23,11 @@ module InsalesApi
     end
 
     private
-      def proxy_for(value)
-        return value unless self.class.need_proxy?(value)
-        self.class.new(@configurer, value)
-      end
+
+    def proxy_for(value)
+      return value unless self.class.need_proxy?(value)
+
+      self.class.new(@configurer, value)
+    end
   end
 end

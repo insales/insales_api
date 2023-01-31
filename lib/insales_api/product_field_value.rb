@@ -5,8 +5,8 @@ module InsalesApi
     class << self
       def find_by_field_id(params)
         field_id = params[:product_field_id]
-        all(params: {product_id: params[:product_id]}).
-          find { |x| x.product_field_id == field_id }
+        all(params: { product_id: params[:product_id] })
+          .find { |x| x.product_field_id == field_id }
       end
 
       def create_or_update(params)

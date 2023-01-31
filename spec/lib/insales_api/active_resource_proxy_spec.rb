@@ -10,8 +10,8 @@ describe InsalesApi::ActiveResourceProxy do
     subject { proxy.send(method_name) }
 
     it 'should proxy method to object & pass result through #proxy_for' do
-      result1 = {test: :resut1}
-      result2 = {test: :resut2}
+      result1 = { test: :resut1 }
+      result2 = { test: :resut2 }
       object.should_receive(method_name).and_return(result1)
       proxy.should_receive(:proxy_for).with(result1).and_return(result2)
       subject.should eq(result2)

@@ -32,12 +32,12 @@ describe InsalesApi::App do
     subject { app.authorization_url }
     let(:expected) do
       URI::Generic.build(
-        scheme:   'http',
-        host:     domain,
-        path:     "/admin/applications/#{app.api_key}/login",
-        query:    {
-          token:  app.salt,
-          login:  app.api_autologin_url,
+        scheme: 'http',
+        host: domain,
+        path: "/admin/applications/#{app.api_key}/login",
+        query: {
+          token: app.salt,
+          login: app.api_autologin_url,
         }.to_query,
       ).to_s
     end

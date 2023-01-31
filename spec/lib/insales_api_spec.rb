@@ -1,12 +1,10 @@
 require 'spec_helper'
 
 describe InsalesApi do
-
   describe '.wait_retry' do
-
     response_stub = Struct.new(:code, :retry_after) do
       def [](key)
-        {'Retry-After' => retry_after}[key]
+        { 'Retry-After' => retry_after }[key]
       end
     end
 
@@ -39,7 +37,7 @@ describe InsalesApi do
     end
 
     it 'should use callback proc' do
-      callback = Proc.new{}
+      callback = Proc.new {}
       counter = 0
       callback.should_receive(:call).with(0, 1, 3, instance_of(ActiveResource::ServerError))
       callback.should_receive(:call).with(0, 2, 3, instance_of(ActiveResource::ServerError))
@@ -100,11 +98,11 @@ describe InsalesApi do
       success = false
       described_class.wait_retry do |x|
         raise ActiveResource::ServerError.new(response_stub.new("503", "0")) if x < 10
+
         success = true
       end
 
       expect(success).to be_true
     end
   end
-
 end

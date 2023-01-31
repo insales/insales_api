@@ -60,11 +60,12 @@ module ActiveResource
       #
       #   Inventory.find
       #   # => raises ResourceNotFound
-      def find(options={})
+      def find(options = {})
         find_singleton(options)
       end
 
       private
+
       # Find singleton resource
       def find_singleton(options)
         prefix_options, query_options = split_options(options[:params])
@@ -73,8 +74,8 @@ module ActiveResource
         resp = self.format.decode(self.connection.get(path, self.headers).body)
         instantiate_record(resp, {})
       end
-
     end
+
     # Deletes the resource from the remove service.
     #
     # ==== Examples
@@ -84,7 +85,6 @@ module ActiveResource
     def destroy
       connection.delete(singleton_path, self.class.headers)
     end
-
 
     protected
 
@@ -108,7 +108,5 @@ module ActiveResource
     def singleton_path(options = nil)
       self.class.singleton_path(options || prefix_options)
     end
-
   end
-
 end
