@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe InsalesApi::ActiveResourceProxy do
   let(:proxy) { described_class.new(configurer, object) }
-  let(:configurer) { Object.new.tap { |x| x.stub(:init_api).and_yield } }
+  let(:configurer) { Object.new.tap { |x| allow(x).to receive(:init_api).and_yield } }
 
   describe '#method_missing' do
     subject(:result) { proxy.send(method_name) }
@@ -15,8 +15,8 @@ describe InsalesApi::ActiveResourceProxy do
     it 'proxies method to object & pass result through #proxy_for' do
       result1 = { test: :resut1 }
       result2 = { test: :resut2 }
-      object.should_receive(method_name).and_return(result1)
-      proxy.should_receive(:proxy_for).with(result1).and_return(result2)
+      expect(object).to receive(method_name).and_return(result1)
+      expect(proxy).to receive(:proxy_for).with(result1).and_return(result2)
       expect(result).to eq(result2)
     end
   end

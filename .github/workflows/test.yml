@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  pull_request: {}
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    continue-on-error: ${{matrix.experimental}}
+
+    strategy:
+      matrix:
+        experimental: [false]
+
+        ruby:
+          - 1.9.3
+          - 2.6
+          #- 2.7
+          - 3.2
+
+        #include:
+        #  - experimental: true
+        #    ruby: head
+
+    env:
+      BUNDLE_WITHOUT: lint
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{matrix.ruby}}
+        bundler-cache: true
+
+    - name: Run tests
+      run: ${{matrix.env}} bundle exec rake spec
