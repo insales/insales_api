@@ -1,22 +1,22 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe InsalesApi do
-
   describe '.wait_retry' do
-
     response_stub = Struct.new(:code, :retry_after) do
       def [](key)
-        {'Retry-After' => retry_after}[key]
+        { 'Retry-After' => retry_after }[key]
       end
     end
 
-    it 'should not run without block' do
+    it 'does not run without block' do
       expect do
         described_class.wait_retry(20, nil)
-      end.to raise_error
+      end.to raise_error(LocalJumpError)
     end
 
-    it 'should handle succesfull request' do
+    it 'handles succesfull request' do
       counter = 0
       described_class.wait_retry do
         counter += 1
@@ -25,56 +25,50 @@ describe InsalesApi do
       expect(counter).to eq(1)
     end
 
-    it 'should make specified amount of attempts' do
+    it 'makes specified amount of attempts' do
       counter = 0
       described_class.wait_retry(3) do
         counter += 1
 
-        if counter < 3
-          raise ActiveResource::ServerError.new(response_stub.new("503", "0"))
-        end
+        raise ActiveResource::ServerError.new(response_stub.new("503", "0")) if counter < 3
       end
 
       expect(counter).to eq(3)
     end
 
-    it 'should use callback proc' do
-      callback = Proc.new{}
+    it 'uses callback proc' do
+      callback = proc {}
       counter = 0
-      callback.should_receive(:call).with(0, 1, 3, instance_of(ActiveResource::ServerError))
-      callback.should_receive(:call).with(0, 2, 3, instance_of(ActiveResource::ServerError))
+      expect(callback).to receive(:call).with(0, 1, 3, instance_of(ActiveResource::ServerError))
+      expect(callback).to receive(:call).with(0, 2, 3, instance_of(ActiveResource::ServerError))
 
       described_class.wait_retry(3, callback) do
         counter += 1
 
-        if counter < 3
-          raise ActiveResource::ServerError.new(response_stub.new("503", "0"))
-        end
+        raise ActiveResource::ServerError.new(response_stub.new("503", "0")) if counter < 3
       end
     end
 
-    it 'should pass attempt number to block' do
+    it 'passes attempt number to block' do
       last_attempt_no = 0
       described_class.wait_retry(3) do |x|
         last_attempt_no = x
 
-        if last_attempt_no < 3
-          raise ActiveResource::ServerError.new(response_stub.new("503", "0"))
-        end
+        raise ActiveResource::ServerError.new(response_stub.new("503", "0")) if last_attempt_no < 3
       end
 
       expect(last_attempt_no).to eq(3)
     end
 
-    it 'should raise if no attempts left' do
+    it 'raises if no attempts left' do
       expect do
-        described_class.wait_retry(3) do |x|
+        described_class.wait_retry(3) do
           raise ActiveResource::ServerError.new(response_stub.new("503", "0"))
         end
       end.to raise_error(ActiveResource::ServerError)
     end
 
-    it 'should raise on user errors' do
+    it 'raises on user errors' do
       attempts = 0
       expect do
         described_class.wait_retry(3) do |x|
@@ -85,7 +79,7 @@ describe InsalesApi do
       expect(attempts).to eq(1)
     end
 
-    it 'should raise on other server errors' do
+    it 'raises on other server errors' do
       attempts = 0
       expect do
         described_class.wait_retry(3) do |x|
@@ -96,15 +90,15 @@ describe InsalesApi do
       expect(attempts).to eq(1)
     end
 
-    it 'should run until success' do |x|
+    it 'runs until success' do
       success = false
       described_class.wait_retry do |x|
         raise ActiveResource::ServerError.new(response_stub.new("503", "0")) if x < 10
+
         success = true
       end
 
-      expect(success).to be_true
+      expect(success).to be true
     end
   end
-
 end

@@ -1,67 +1,76 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe InsalesApi::App do
+  subject(:app) { described_class.new(domain, password) }
+
   let(:domain) { 'my.shop.com' }
   let(:password) { 'password' }
-  let(:app) { InsalesApi::App.new(domain, password) }
-
-  subject { app }
 
   describe '#initialize' do
-    its(:domain) { should eq(domain) }
-    its(:password) { should eq(password) }
-    its(:authorized?) { should be false }
+    it { expect(app.domain).to eq(domain) }
+    it { expect(app.password).to eq(password) }
+    it { expect(app.authorized?).to be false }
   end
 
   describe '#configure_api' do
     it 'configures InsalesApi::Base' do
-      InsalesApi::Base.should_receive(:configure).with(described_class.api_key, domain, password)
+      allow(InsalesApi::Base).to receive(:configure).with(described_class.api_key, domain, password)
       app.configure_api
+      expect(InsalesApi::Base).to have_received(:configure).with(described_class.api_key, domain, password)
     end
   end
 
   describe '#salt' do
-    its(:salt) { should be }
+    it { expect(app.salt).to be_present }
   end
 
   describe '#auth_token' do
-    its(:auth_token) { should eq(InsalesApi::Password.create(app.password, app.salt)) }
+    it { expect(app.auth_token).to eq(InsalesApi::Password.create(app.password, app.salt)) }
   end
 
   describe 'authorization_url' do
     subject { app.authorization_url }
+
     let(:expected) do
       URI::Generic.build(
-        scheme:   'http',
-        host:     domain,
-        path:     "/admin/applications/#{app.api_key}/login",
-        query:    {
-          token:  app.salt,
-          login:  app.api_autologin_url,
-        }.to_query,
+        scheme: 'http',
+        host: domain,
+        path: "/admin/applications/#{app.api_key}/login",
+        query: {
+          token: app.salt,
+          login: app.api_autologin_url
+        }.to_query
       ).to_s
     end
-    it { should eq(expected) }
+
+    it { is_expected.to eq(expected) }
   end
 
   describe '#authorize' do
-    before { app.auth_token }
     subject { app.authorize(token) }
+
+    before { app.auth_token }
 
     context 'when valid token is given' do
       let(:token) { app.auth_token }
-      it { should be true }
+
+      it { is_expected.to be true }
     end
 
     context 'when invalid token is given' do
       let(:token) { 'bad_token' }
-      it { should be false }
+
+      it { is_expected.to be false }
     end
   end
 
   describe '::password_by_token' do
+    subject { described_class.password_by_token(token) }
+
     let(:token) { 'test' }
-    subject { InsalesApi::App.password_by_token(token) }
-    it { should eq(InsalesApi::Password.create(InsalesApi::App.api_secret, token)) }
+
+    it { is_expected.to eq(InsalesApi::Password.create(described_class.api_secret, token)) }
   end
 end

@@ -27,8 +27,8 @@ module InsalesApi
 
       def dump_config
         {
-          user:     self.user,
-          site:     self.site,
+          user: self.user,
+          site: self.site,
           password: self.password,
         }
       end

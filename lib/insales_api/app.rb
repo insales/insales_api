@@ -1,8 +1,9 @@
 module InsalesApi
   class App
     class_attribute :api_key, :api_secret, :api_autologin_url, :api_host, :api_autologin_path,
-      :base_resource_class
+                    :base_resource_class
     attr_reader :authorized, :domain, :password
+
     self.base_resource_class = Base
 
     class << self
@@ -18,15 +19,15 @@ module InsalesApi
 
       alias_method :prepare_shop, :prepare_domain
       deprecate prepare_shop: :prepare_domain,
-        api_host: :api_autologin_url,
-        api_autologin_path: :api_autologin_url,
-        deprecator: Deprecator
+                api_host: :api_autologin_url,
+                api_autologin_path: :api_autologin_url,
+                deprecator: Deprecator
 
-      def install(domain, token, insales_id)
+      def install(domain, token, insales_id) # rubocop:disable Lint/UnusedMethodArgument
         true
       end
 
-      def uninstall(domain, password)
+      def uninstall(domain, password) # rubocop:disable Lint/UnusedMethodArgument
         true
       end
 
@@ -46,13 +47,13 @@ module InsalesApi
       match = /(.+):(\d+)/.match host
       host, port = match[1..2] if match
       URI::Generic.build(
-        scheme:   'http',
-        host:     host,
-        port:     port && port.to_i,
-        path:     "/admin/applications/#{api_key}/login",
-        query:    {
-          token:  salt,
-          login:  api_autologin_url || "http://#{api_host}/#{api_autologin_path}",
+        scheme: 'http',
+        host: host,
+        port: port && port.to_i,
+        path: "/admin/applications/#{api_key}/login",
+        query: {
+          token: salt,
+          login: api_autologin_url || "http://#{api_host}/#{api_autologin_path}",
         }.to_query,
       ).to_s
     end

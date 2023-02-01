@@ -81,7 +81,7 @@ module InsalesApi
     #     puts "Attempt ##{x}."
     #     products = InsalesApi::Products.all
     #   end
-    def wait_retry(max_attempts = nil, callback = nil, &block)
+    def wait_retry(max_attempts = nil, callback = nil, &block) # rubocop:disable Lint/UnusedMethodArgument
       attempts = 0
 
       begin
@@ -90,6 +90,7 @@ module InsalesApi
       rescue ActiveResource::ServerError => ex
         raise ex if '503' != ex.response.code.to_s
         raise ex if max_attempts && attempts >= max_attempts
+
         retry_after = (ex.response['Retry-After'] || 150).to_i
         callback.call(retry_after, attempts, max_attempts, ex) if callback
         sleep(retry_after)
@@ -97,7 +98,6 @@ module InsalesApi
       end
     end
   end
-
 end
 
 require 'insales_api/helpers/init_api'

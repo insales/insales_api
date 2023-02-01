@@ -1,3 +1,3 @@
-module InsalesApi  
+module InsalesApi
   class OptionName < Base; end
 end
