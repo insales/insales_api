@@ -1,0 +1,15 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rake
+  - rubocop-performance
+
+AllCops:
+  NewCops: enable
+
+Style/StringLiterals: { Enabled: false }
+Style/RaiseArgs: { Enabled: false }
+
+RSpec/ExampleLength: { Max: 10 }
+RSpec/MessageSpies: { Enabled: false }
+RSpec/MultipleExpectations: { Enabled: false }

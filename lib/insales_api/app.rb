@@ -23,11 +23,11 @@ module InsalesApi
                 api_autologin_path: :api_autologin_url,
                 deprecator: Deprecator
 
-      def install(domain, token, insales_id)
+      def install(domain, token, insales_id) # rubocop:disable Lint/UnusedMethodArgument
         true
       end
 
-      def uninstall(domain, password)
+      def uninstall(domain, password) # rubocop:disable Lint/UnusedMethodArgument
         true
       end
 

@@ -10,7 +10,7 @@ module InsalesApi
       end
 
       def create_or_update(params)
-        if value = find_by_field_id(params)
+        if (value = find_by_field_id(params))
           value.update_attribute(:value, params[:value])
           value
         else
