@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-$LOAD_PATH.push File.expand_path('lib', __dir__)
+# $LOAD_PATH.push File.expand_path('lib', __dir__)
+$LOAD_PATH.push File.expand_path('../lib', __FILE__)
 require 'insales_api/version'
 
 Gem::Specification.new do |s|
