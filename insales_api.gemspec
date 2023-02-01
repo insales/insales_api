@@ -14,9 +14,16 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = 'insales_api'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map { |f| File.basename(f) }
+  s.files = `git ls-files`.split("\n").reject do |f|
+    f.match(Regexp.union(
+              %r{^gemfiles/},
+              %r{^spec/},
+              /^\./,
+              /^Appraisals/,
+              /^Gemfile/,
+              /^Rakefile/
+            ))
+  end
 
   s.add_dependency('activeresource', ['>= 3.0.0'])
   s.add_dependency('activesupport', ['>= 3.0.0'])
