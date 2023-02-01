@@ -28,6 +28,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency('activeresource', ['>= 3.0.0'])
   s.add_dependency('activesupport', ['>= 3.0.0'])
-  s.add_development_dependency 'rake', '~> 10.3'
+  s.add_development_dependency 'rake', '>= 10.3'
   s.add_development_dependency 'rspec', '~> 3.12'
 end
