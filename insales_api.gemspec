@@ -13,7 +13,13 @@ Gem::Specification.new do |s|
   s.summary     = 'Gem for accessing the InSales REST web services'
   s.description = 'Gem for accessing the InSales REST web services'
 
-  s.rubyforge_project = 'insales_api'
+  if s.respond_to?(:metadata) # old rubygems do not support metadata
+    s.metadata["homepage_uri"] = s.homepage
+    s.metadata["source_code_uri"] = "https://github.com/insales/insales_api"
+    s.metadata["changelog_uri"] = "https://github.com/insales/insales_api/blob/master/CHANGELOG.md"
+  end
+
+  s.required_ruby_version = '>= 1.9'
 
   s.files = `git ls-files`.split("\n").reject do |f|
     f.match(Regexp.union(
