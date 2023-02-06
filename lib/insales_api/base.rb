@@ -20,7 +20,7 @@ module InsalesApi
     class << self
       def configure(api_key, domain, password)
         self.user     = api_key
-        self.site     = "http://#{domain}"
+        self.site     = "https://#{domain}"
         self.password = password
         self
       end
