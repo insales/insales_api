@@ -55,6 +55,7 @@ module InsalesApi
     autoload :User
     autoload :Variant
     autoload :Webhook
+    autoload :Warehouse
   end
 
   class << self
