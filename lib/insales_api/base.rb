@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'insales_api/resource/countable'
 require 'insales_api/resource/paginated'
 require 'insales_api/resource/with_updated_since'
@@ -9,18 +11,22 @@ module InsalesApi
     extend Resource::Paginated
 
     self.include_root_in_json = false
-    self.headers['User-Agent'] = %W(
+    self.headers['User-Agent'] = %W[
       InsalesApi/#{InsalesApi::VERSION}
       ActiveResource/#{ActiveResource::VERSION::STRING}
       Ruby/#{RUBY_VERSION}
-    ).join(' ')
+    ].join(' ')
     self.format = :xml
     self.prefix = '/admin/'
 
     class << self
       def configure(api_key, domain, password)
         self.user     = api_key
-        self.site     = "https://#{domain}"
+        self.site     = if domain =~ /\Ahttps?:/
+                          domain
+                        else
+                          "https://#{domain}"
+                        end
         self.password = password
         self
       end
@@ -29,7 +35,7 @@ module InsalesApi
         {
           user: self.user,
           site: self.site,
-          password: self.password,
+          password: self.password
         }
       end
 
