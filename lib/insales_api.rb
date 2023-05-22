@@ -25,6 +25,7 @@ module InsalesApi
     autoload :ClientGroup
     autoload :Collect
     autoload :Collection
+    autoload :Contractor
     autoload :Currency
     autoload :CustomStatus
     autoload :DeliveryVariant
