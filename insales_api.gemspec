@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     s.metadata["changelog_uri"] = "https://github.com/insales/insales_api/blob/master/CHANGELOG.md"
   end
 
-  s.required_ruby_version = '>= 1.9'
+  s.required_ruby_version = '>= 2.3'
 
   s.files = `git ls-files`.split("\n").reject do |f|
     f.match(Regexp.union(

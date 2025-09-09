@@ -16,14 +16,9 @@ jobs:
         experimental: [false]
 
         ruby:
-          - 1.9.3
           - 2.6
-          #- 2.7
+          - 2.7
           - 3.2
-
-        #include:
-        #  - experimental: true
-        #    ruby: head
 
     env:
       BUNDLE_WITHOUT: lint
