@@ -19,8 +19,11 @@ jobs:
           - 3.2
         rails-version:
           - 71
-          - 72
         include:
+          - ruby: 3.1
+            rails-version: 72
+          - ruby: 3.2
+            rails-version: 72
           - ruby: 3.2
             rails-version: 80
 
