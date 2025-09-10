@@ -9,23 +9,30 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    continue-on-error: ${{matrix.experimental}}
 
     strategy:
       matrix:
-        experimental: [false]
-
         ruby:
-          - 1.9.3
-          - 2.6
-          #- 2.7
           - 3.2
+          - 3.3
+          - 3.4
+        rails-version:
+          - 71
+          - 72
+          - 80
+        include:
+          - ruby: 2.7
+            rails-version: 71
+          - ruby: 3.0
+            rails-version: 71
+          - ruby: 3.1
+            rails-version: 71
+          - ruby: 3.1
+            rails-version: 72
 
-        #include:
-        #  - experimental: true
-        #    ruby: head
 
     env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/rails_${{ matrix.rails-version }}.gemfile
       BUNDLE_WITHOUT: lint
     steps:
     - uses: actions/checkout@v3

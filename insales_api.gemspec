@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
     s.metadata["changelog_uri"] = "https://github.com/insales/insales_api/blob/master/CHANGELOG.md"
   end
 
-  s.required_ruby_version = '>= 1.9'
+  s.required_ruby_version = '>= 2.3'
 
   s.files = `git ls-files`.split("\n").reject do |f|
     f.match(Regexp.union(
@@ -32,8 +32,9 @@ Gem::Specification.new do |s|
             ))
   end
 
-  s.add_dependency('activeresource', ['>= 3.0.0'])
-  s.add_dependency('activesupport', ['>= 3.0.0'])
+  s.add_dependency('activeresource', ['>= 6.0.0'])
+
   s.add_development_dependency 'rake', '>= 10.3'
   s.add_development_dependency 'rspec', '~> 3.12'
+  s.add_development_dependency "appraisal", '~> 2.5'
 end
